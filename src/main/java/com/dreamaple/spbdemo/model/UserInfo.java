@@ -199,7 +199,7 @@ public class UserInfo implements Serializable {
     this.column0 = column0;
   }
 
-  public String toJsonString(){
+  public JSONObject toJSONObject(){
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("user_uid",userUid);
     jsonObject.put("user_username",userUsername);
@@ -217,6 +217,6 @@ public class UserInfo implements Serializable {
     jsonObject.put("user_column3",column3);
     jsonObject.put("user_column4",column4);
     jsonObject.put("user_column0",column0);
-    return jsonObject.toJSONString();
+    return jsonObject;
   }
 }
