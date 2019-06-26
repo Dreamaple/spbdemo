@@ -13,7 +13,14 @@ public interface UserRepository extends JpaRepository<UserInfo,Long> {
 //
 //    public UserInfo save(UserInfo user);
 
-    @Query(value = "SELECT u FROM UserInfo u WHERE u.user_email=:email")
+    @Query(value = "SELECT u FROM UserInfo u WHERE u.userEmail=:email")
     public UserInfo findEmail(@Param("email") String email);
 
+
+    @Query(value = "SELECT u FROM UserInfo u WHERE u.userUsername=:username")
+    public UserInfo findUsername(@Param("username") String email);
+
+
+    @Query(value = "SELECT u FROM UserInfo u WHERE u.userTel=:tel")
+    public UserInfo findTel(@Param("tel") String email);
 }

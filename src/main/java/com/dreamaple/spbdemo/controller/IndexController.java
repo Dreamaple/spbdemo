@@ -19,7 +19,7 @@ public class IndexController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/home/index", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public String index() {
         JSONObject jsonObject = new JSONObject();
         Optional<UserInfo> byId = userRpy.findById(2L);

@@ -1,12 +1,10 @@
 package com.dreamaple.spbdemo.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.dreamaple.spbdemo.dao.repository.UserRepository;
 import com.dreamaple.spbdemo.services.UserService;
 import com.dreamaple.spbdemo.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +19,9 @@ public class UserController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    private UserService userService = new UserService();
+
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String register(@RequestParam String username,
                             @RequestParam String nickname,
                             @RequestParam String pwd,
@@ -31,13 +31,12 @@ public class UserController {
                             @RequestParam String email,
                             @RequestParam String signature,
                             @RequestParam String local) {
-        UserService userService = new UserService();
-        JSONObject jsonObject = new JSONObject();
-        if (userService.register(username, nickname, pwd, sex, tel, birth, email, signature, local)) {
+        if (userService.register(userRpy,username, nickname, pwd, sex, tel, birth, email, signature, local)) {
             return SpringUtils.getReturn("successed").toJSONString();
         } else {
             return SpringUtils.getReturn("1","请求失败").toJSONString();
         }
+//        return SpringUtils.getReturn("1", "success").toJSONString();
     }
     @RequestMapping(value = "/confirmEmail", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String confirmEmail(@RequestParam String param1,

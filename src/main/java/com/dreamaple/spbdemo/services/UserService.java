@@ -2,23 +2,22 @@ package com.dreamaple.spbdemo.services;
 
 import com.dreamaple.spbdemo.dao.repository.UserRepository;
 import com.dreamaple.spbdemo.model.UserInfo;
+import com.dreamaple.spbdemo.utils.ReturnHelper;
 import com.dreamaple.spbdemo.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class UserService {
-
-    @Autowired
     private UserRepository userRpy;
-    @Autowired
     private JavaMailSender mailSender;
+//    btnSendSms     etSmsCode
 
-    public boolean register(String username,
+    public boolean register(UserRepository userRpy,
+                            String username,
                             String nickname,
                             String pwd,
                             String sex,
@@ -28,20 +27,23 @@ public class UserService {
                             String signature,
                             String local) {
         UserInfo userInfo = new UserInfo();
+        userInfo.setUserUid("A"+String.format("%04d",userRpy.count()+100001));
         userInfo.setUserUsername(username);
         userInfo.setUserNickname(nickname);
         userInfo.setUserPwd(SpringUtils.getMD5(pwd));
         userInfo.setUserSex(sex);
         userInfo.setUserTel(tel);
-        try {
-            userInfo.setUserBirth((Date) new SimpleDateFormat("yyyy-MM-dd").parse(birth));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
+        userInfo.setUserBirth(Date.valueOf(birth));
+//        try {
+//            userInfo.setUserBirth((Date) new SimpleDateFormat("yyyy-MM-dd").parse(birth));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
         userInfo.setUserEmail(email);
         userInfo.setUserSignature(signature);
         userInfo.setUserLocal(local);
+//        System.out.println( userRpy.toString());
         userRpy.save(userInfo);
 
         return true;
@@ -77,4 +79,21 @@ public class UserService {
         }
     }
 
+    public ReturnHelper<UserInfo> loginWithEmail(String email, String password){
+        ReturnHelper<UserInfo> userInfoReturnHelper = new ReturnHelper<>();
+        UserInfo userInfo = userRpy.findEmail(email);
+        return userInfoReturnHelper;
+    }
+
+    public ReturnHelper<UserInfo> loginWithTel(String tel,String password){
+        ReturnHelper<UserInfo> userInfoReturnHelper = new ReturnHelper<>();
+        UserInfo userInfo = userRpy.findTel(tel);
+        return userInfoReturnHelper;
+    }
+
+    public ReturnHelper<UserInfo> loginWithUsername(String username,String password){
+        ReturnHelper<UserInfo> userInfoReturnHelper = new ReturnHelper<>();
+        UserInfo userInfo = userRpy.findUsername(username);
+        return userInfoReturnHelper;
+    }
 }

@@ -35,16 +35,87 @@ public class UserInfo implements Serializable {
   private String userEmail;
   @Column(name = "user_signature")
   private String userSignature;
-  @Column(name = "user_column1")
+  @Column(name = "user_token")
+  private String userToken;
+  @Column(name = "user_rigstatus")
+  private String userRigstatus;
+  @Column(name = "column1")
   private String column1;
-  @Column(name = "user_column2")
+  @Column(name = "column2")
   private String column2;
-  @Column(name = "user_column3")
+  @Column(name = "column3")
   private String column3;
-  @Column(name = "user_column4")
+  @Column(name = "column4")
   private String column4;
-  @Column(name = "user_column0")
+  @Column(name = "column0")
   private String column0;
+  @Column(name = "user_column1")
+  private String userColumn1;
+  @Column(name = "user_column2")
+  private String userColumn2;
+  @Column(name = "user_column3")
+  private String userColumn3;
+  @Column(name = "user_column4")
+  private String userColumn4;
+  @Column(name = "user_column0")
+  private String userColumn0;
+
+  public String getUserColumn1() {
+    return userColumn1;
+  }
+
+  public void setUserColumn1(String userColumn1) {
+    this.userColumn1 = userColumn1;
+  }
+
+  public String getUserColumn2() {
+    return userColumn2;
+  }
+
+  public void setUserColumn2(String userColumn2) {
+    this.userColumn2 = userColumn2;
+  }
+
+  public String getUserColumn3() {
+    return userColumn3;
+  }
+
+  public void setUserColumn3(String userColumn3) {
+    this.userColumn3 = userColumn3;
+  }
+
+  public String getUserColumn4() {
+    return userColumn4;
+  }
+
+  public void setUserColumn4(String userColumn4) {
+    this.userColumn4 = userColumn4;
+  }
+
+  public String getUserColumn0() {
+    return userColumn0;
+  }
+
+  public void setUserColumn0(String userColumn0) {
+    this.userColumn0 = userColumn0;
+  }
+
+  public String getUserToken() {
+    return userToken;
+  }
+
+  public void setUserToken(String userToken) {
+    this.userToken = userToken;
+  }
+
+  public String getUserRigstatus() {
+    return userRigstatus;
+  }
+
+  public void setUserRigstatus(String userRigstatus) {
+    this.userRigstatus = userRigstatus;
+  }
+
 
 
   public long getUserInfoId() {
@@ -212,11 +283,18 @@ public class UserInfo implements Serializable {
     jsonObject.put("user_exp",userExp);
     jsonObject.put("user_email",userEmail);
     jsonObject.put("user_signature",userSignature);
-    jsonObject.put("user_column1",column1);
-    jsonObject.put("user_column2",column2);
-    jsonObject.put("user_column3",column3);
-    jsonObject.put("user_column4",column4);
-    jsonObject.put("user_column0",column0);
+    jsonObject.put("user_token",userToken);
+    jsonObject.put("user_rigstatus",userRigstatus);
+    jsonObject.put("user_column1",userColumn1);
+    jsonObject.put("user_column2",userColumn2);
+    jsonObject.put("user_column3",userColumn3);
+    jsonObject.put("user_column4",userColumn4);
+    jsonObject.put("user_column0",userColumn0);
+    jsonObject.put("column1",column1);
+    jsonObject.put("column2",column2);
+    jsonObject.put("column3",column3);
+    jsonObject.put("column4",column4);
+    jsonObject.put("column0",column0);
     return jsonObject;
   }
 }
